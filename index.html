@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Cuaca</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Bootstrap CDN biar cepat rapi -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-dark text-light">
+  <div class="container py-4">
+    <h1 class="text-center mb-4 fw-bold">📡 Sistem Informasi Cuaca</h1>
+
+    <!-- CARD LOGIN -->
+    <div id="auth-section" class="row justify-content-center">
+      <div class="col-md-5">
+        <div class="card shadow-lg glass-card">
+          <div class="card-body">
+            <h4 class="card-title mb-3 text-center">Login</h4>
+            <div class="mb-3">
+              <label class="form-label">Username</label>
+              <input type="text" id="login-username" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" id="login-password" class="form-control">
+            </div>
+            <button id="btn-login" class="btn btn-primary w-100 mb-2">Masuk</button>
+            <button id="btn-register" class="btn btn-outline-light w-100">Daftar User Baru</button>
+            <div id="auth-message" class="mt-2 small text-center"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="mt-4 d-none">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <h4 class="mb-0">Data Cuaca</h4>
+          <small id="user-info"></small>
+        </div>
+        <button id="btn-logout" class="btn btn-sm btn-outline-light">Logout</button>
+      </div>
+
+      <!-- Filter -->
+      <div class="card mb-3 glass-card">
+        <div class="card-body">
+          <form id="filter-form" class="row g-2">
+            <div class="col-md-3">
+              <input type="text" id="filter-kota" class="form-control" placeholder="Nama kota">
+            </div>
+            <div class="col-md-3">
+              <input type="text" id="filter-kondisi" class="form-control" placeholder="Kondisi (Cerah, Hujan...)">
+            </div>
+            <div class="col-md-2">
+              <input type="number" id="filter-suhu-min" class="form-control" placeholder="Suhu min">
+            </div>
+            <div class="col-md-2">
+              <input type="number" id="filter-suhu-max" class="form-control" placeholder="Suhu max">
+            </div>
+            <div class="col-md-2 d-grid">
+              <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Admin Section -->
+      <div id="admin-section" class="row g-3 mb-3 d-none">
+        <div class="col-md-4">
+          <div class="card glass-card">
+            <div class="card-body">
+              <h5>Tambah Kota</h5>
+              <input type="text" id="add-nama-kota" class="form-control mb-2" placeholder="Nama kota baru">
+              <button id="btn-add-kota" class="btn btn-success w-100 btn-sm">Simpan Kota</button>
+              <div id="kota-message" class="small mt-1"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card glass-card">
+            <div class="card-body">
+              <h5>Tambah Data Cuaca</h5>
+              <div class="row g-2">
+                <div class="col-md-3">
+                  <label class="form-label small">Kota</label>
+                  <select id="cuaca-kota-id" class="form-select"></select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label small">Suhu (°C)</label>
+                  <input type="number" id="cuaca-suhu" class="form-control">
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label small">Kelembapan (%)</label>
+                  <input type="number" id="cuaca-kelembapan" class="form-control">
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label small">Kondisi</label>
+                  <input type="text" id="cuaca-kondisi" class="form-control" placeholder="Cerah, Hujan...">
+                </div>
+              </div>
+              <button id="btn-add-cuaca" class="btn btn-warning btn-sm mt-2">Simpan Cuaca</button>
+              <div id="cuaca-message" class="small mt-1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- List Cuaca -->
+      <div id="cuaca-list" class="row g-3">
+        <!-- kartu cuaca akan di-generate via JS -->
+      </div>
+      <div id="cuaca-list-message" class="mt-2"></div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
