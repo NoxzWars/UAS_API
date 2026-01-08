@@ -41,7 +41,28 @@ document.getElementById("btn-login").addEventListener("click", async () => {
   const password = document.getElementById("login-password").value.trim();
   const msg = document.getElementById("auth-message");
 
+  // ================= VALIDASI FRONTEND =================
+  if (!username && !password) {
+    msg.textContent = "Username dan password wajib diisi";
+    msg.className = "text-danger";
+    return;
+  }
+
+  if (!username) {
+    msg.textContent = "Username tidak boleh kosong";
+    msg.className = "text-danger";
+    return;
+  }
+
+  if (!password) {
+    msg.textContent = "Password tidak boleh kosong";
+    msg.className = "text-danger";
+    return;
+  }
+
+  // ================= PROSES LOGIN =================
   msg.textContent = "Memproses login...";
+  msg.className = "text-info";
 
   try {
     const res = await fetch(`${API_BASE_URL}/login`, {
@@ -51,8 +72,9 @@ document.getElementById("btn-login").addEventListener("click", async () => {
     });
 
     const data = await res.json();
+
     if (!res.ok) {
-      msg.textContent = data.message || "Login gagal";
+      msg.textContent = data.message || "Username atau password salah";
       msg.className = "text-danger";
       return;
     }
@@ -63,12 +85,14 @@ document.getElementById("btn-login").addEventListener("click", async () => {
 
     msg.textContent = "Login berhasil";
     msg.className = "text-success";
+
     setAuthUI();
-  } catch {
-    msg.textContent = "Terjadi kesalahan koneksi";
+  } catch (err) {
+    msg.textContent = "Server tidak dapat dihubungi";
     msg.className = "text-danger";
   }
 });
+
 
 // ================= LOGOUT =================
 document.getElementById("btn-logout").addEventListener("click", () => {
